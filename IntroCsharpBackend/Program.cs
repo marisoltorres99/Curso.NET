@@ -1,4 +1,4 @@
-﻿Sale sale = new Sale(3000);
+﻿/*Sale sale = new Sale(3000);
 // var message = sale.GetInfo();
 // Console.WriteLine(message);
 
@@ -45,5 +45,45 @@ class Sale
     public virtual string GetInfo()
     {
         return "El total es " + Total;
+    }
+}*/
+
+// interfaces (contrato)
+
+var sale = new Sale();
+var beer = new Beer();
+
+Some(sale);
+Some(beer);
+void Some(ISave save)
+{
+    save.Save();
+}
+
+interface ISale
+{
+    decimal Total { get; set; }
+}
+
+interface ISave
+{
+    public void Save();
+}
+
+public class Sale : ISale, ISave
+{
+    public decimal Total { get; set; }
+
+    public void Save()
+    {
+        Console.WriteLine("Guardado en BD.");
+    }
+}
+
+public class Beer : ISave
+{
+    public void Save()
+    {
+        Console.WriteLine("Guardado en Servicio.");
     }
 }
