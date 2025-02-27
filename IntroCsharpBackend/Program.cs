@@ -90,7 +90,7 @@ public class Beer : ISave
 
 // generics
 
-var numbers = new MyList<int>(5);
+/*var numbers = new MyList<int>(5);
 var names = new MyList<string>(5);
 var beers = new MyList<Beer>(3);
 
@@ -176,4 +176,32 @@ public class Beer
         return "Nombre: " + Name + " Precio: " + Price;
     }
 
+}*/
+
+// serializacion y deserializacion de objetos (JSON)
+
+using System.Text.Json;
+
+var marisol = new People()
+{
+    Name = "Marisol",
+    Age = 25
+};
+
+string json = JsonSerializer.Serialize(marisol);
+
+Console.WriteLine(json);
+
+string myJson = @"{
+    ""Name"":""Liza"",
+    ""Age"":25
+}";
+
+People? liza = JsonSerializer.Deserialize<People>(myJson);
+Console.WriteLine(liza?.Name);
+Console.WriteLine(liza?.Age);
+public class People
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
 }
