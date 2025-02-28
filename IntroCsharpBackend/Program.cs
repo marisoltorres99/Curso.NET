@@ -283,5 +283,27 @@ void Some(Func<int, int, int> fn, int number)
     var result = fn(number, number);
 }*/
 
+// LINQ
 
+//datos (origen)
+var names = new List<string>()
+{
+    "Marisol", "Liza", "Candela", "Aldana", "Maria Sol"
+};
 
+// consulta LINQ
+var namesResult = from n in names
+                  where n.Length > 6 && n.Length < 8
+                  orderby n
+                  select n;
+
+// consulta con funciones encadenadas (de LINQ C# las transforma a esto)
+var namesResult2 = names.Where(n => n.Length > 3 && n.Length < 8).
+                   OrderBy(n => n).
+                   Select(d => d);
+
+// ejecucion de la consulta
+foreach (var name in namesResult2)
+{
+    Console.WriteLine(name);
+}
