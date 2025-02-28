@@ -180,7 +180,7 @@ public class Beer
 
 // serializacion y deserializacion de objetos (JSON)
 
-using System.Text.Json;
+/*using System.Text.Json;
 
 var marisol = new People()
 {
@@ -204,4 +204,61 @@ public class People
 {
     public string Name { get; set; }
     public int Age { get; set; }
+}*/
+
+// programación funcional, funciones puras (siempre devuelven el mismo valor,
+// no alteran un valor externo dado)
+
+/*Console.Write(Sub(2, 1));
+
+int Sub(int a, int b)
+{
+    return a - b;
+}*/
+
+// se modifica el objeto beer externo, no es una funcion pura, para que sea una pura, creamos otro objeto beer2(clonacion)
+
+/*var beer = new Beer()
+{
+    Name = "quilmes"
+};
+
+Console.WriteLine(ToUpper(beer).Name);
+Console.WriteLine(beer.Name);
+
+Beer ToUpper(Beer beer)
+{
+    var beer2 = new Beer()
+    {
+        Name = beer.Name.ToUpper()
+    };
+
+    return beer2;
 }
+
+public class Beer
+{
+    public string Name { get; set; }
+}*/
+
+// funcion de primera clase, guardado de funciones en variables, funciones de orden superior (recibe funcion como parametro)
+
+/*var show = Show;
+
+Some(show, "Hola como estas?");
+
+void Show(string message)
+{
+    Console.WriteLine(message);
+}
+
+// Action es una palabra reservada para funciones que reciben un valor o varios pero no devuelven nada
+// Func es una palabra reservada para funciones que reciben un valor o varios y devuleven algo
+void Some(Action<string> fn, string message)
+{
+    Console.WriteLine("Hace algo al inicio");
+    fn(message);
+    Console.WriteLine("Hace algo al final");
+}*/
+
+
