@@ -261,4 +261,27 @@ void Some(Action<string> fn, string message)
     Console.WriteLine("Hace algo al final");
 }*/
 
+// expresiones lambda - funciones anonimas
+
+/*Func<int, int, int> sub = (a, b) => a - b;
+
+// con un solo parametro puedo no poner los parentesis
+
+Func<int, int> some = a => a + 2;
+
+Func<int, int> some2 = a =>
+{
+    return a * 2;
+};*/
+
+// expresion lambda + funcion de orden superior
+
+/*Some((a, b) => a + b, 5);
+
+void Some(Func<int, int, int> fn, int number)
+{
+    var result = fn(number, number);
+}*/
+
+
 
