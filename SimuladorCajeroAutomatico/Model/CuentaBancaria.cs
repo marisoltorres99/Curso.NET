@@ -16,19 +16,33 @@ namespace SimuladorCajeroAutomatico.Model {
 
 		public void Depositar(decimal saldoADepositar)
 		{
-			_saldo = _saldo + saldoADepositar;
-		}
+            if (saldoADepositar > -1)
+            {
+                _saldo = _saldo + saldoADepositar;
+            }
+            else
+            {
+                Console.WriteLine("Ingrese un saldo positivo");
+            }
+        }
 
         public void Retirar(decimal saldoARetirar)
         {
-            if (saldoARetirar <= _saldo)
+            if (saldoARetirar > -1)
             {
-                _saldo = _saldo - saldoARetirar;
+                if (saldoARetirar <= _saldo)
+                {
+                    _saldo = _saldo - saldoARetirar;
+                }
+                else
+                {
+                    Console.WriteLine("Saldo Insuficiente");
+                }
             }
-			else
-			{
-				Console.WriteLine("Saldo Insuficiente");
-			}
+            else
+            {
+                Console.WriteLine("Ingrese un saldo positivo");
+            }
         }
 		public void ConsultarSaldo()
 		{
