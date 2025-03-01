@@ -1,13 +1,38 @@
-public class CuentaBancaria
-{
-	public decimal saldo { get; set; }
+namespace SimuladorCajeroAutomatico.Model { 
 
-	public CuentaBancaria(decimal saldoInicial)
+	public class CuentaBancaria
 	{
-		saldo = saldoInicial;
-	}
+		private decimal _saldo;
 
-	public void Depositar(decimal saldoADepositar)
-	{
-		saldo = saldo + saldoADepositar;
-	}
+		public CuentaBancaria(decimal saldoInicial)
+		{
+			_saldo = saldoInicial;
+		}
+
+		public decimal GetSaldo()
+		{
+			return _saldo;
+		}
+
+		public void Depositar(decimal saldoADepositar)
+		{
+			_saldo = _saldo + saldoADepositar;
+		}
+
+        public void Retirar(decimal saldoARetirar)
+        {
+            if (saldoARetirar <= _saldo)
+            {
+                _saldo = _saldo - saldoARetirar;
+            }
+			else
+			{
+				Console.WriteLine("Saldo Insuficiente");
+			}
+        }
+		public void ConsultarSaldo()
+		{
+			Console.WriteLine("Saldo Actual: " + _saldo);
+        }
+    }
+}
