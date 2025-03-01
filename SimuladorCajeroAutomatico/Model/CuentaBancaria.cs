@@ -22,7 +22,7 @@ namespace SimuladorCajeroAutomatico.Model {
             }
             else
             {
-                Console.WriteLine("Ingrese un saldo positivo");
+                Console.WriteLine("Error en el depósito: Ingrese un saldo positivo");
             }
         }
 
@@ -41,7 +41,7 @@ namespace SimuladorCajeroAutomatico.Model {
             }
             else
             {
-                Console.WriteLine("Ingrese un saldo positivo");
+                Console.WriteLine("Error en el retiro: Ingrese un saldo positivo");
             }
         }
 		public void ConsultarSaldo()

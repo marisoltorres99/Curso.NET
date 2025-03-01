@@ -11,7 +11,11 @@ namespace SimuladorCajeroAutomatico.Model {
             Console.WriteLine("2. Retiro");
             Console.WriteLine("3. Consultar Saldo");
             Console.WriteLine("4. Salir");
-            int opcion = Convert.ToInt32(Console.ReadLine());
+            int opcion;
+            while (!int.TryParse(Console.ReadLine(), out opcion) || opcion < 1 || opcion > 4)
+            {
+                Console.WriteLine("Por favor ingrese una opción válida (1-4).");
+            }
 
             switch (opcion)
             {

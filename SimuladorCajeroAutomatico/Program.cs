@@ -4,6 +4,7 @@ public class Program
 {
     static void Main()
     {
+        Console.WriteLine("¡Bienvenido/a!");
         CajeroAutomatico cajero = new CajeroAutomatico();
         bool bandera = true;
         while (bandera)
