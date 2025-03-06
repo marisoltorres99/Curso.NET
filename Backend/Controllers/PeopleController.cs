@@ -12,7 +12,7 @@ namespace Backend.Controllers
         private IPeopleService _peopleService;
 
         // inyeccion de dependencias
-        public PeopleController(IPeopleService peopleService)
+        public PeopleController([FromKeyedServices("people2Service")] IPeopleService peopleService)
         {
             _peopleService = peopleService;
         }
