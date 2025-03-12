@@ -49,28 +49,10 @@ namespace Backend.Controllers
             {
                 return BadRequest(validationResult.Errors);
             }
-            
-            var beer = new Beer()
-            {
-                Name = beerInsertDTO.Name,
-                Alcohol = beerInsertDTO.Alcohol,
-                BrandID = beerInsertDTO.BrandID
-            };
 
-            await _context.Beers.AddAsync(beer);
+            var beerDTO = await _beerService.Add(beerInsertDTO);
 
-            // se guardan los datos en BD
-            await _context.SaveChangesAsync();
-
-            var beerDTO = new BeerDTO
-            {
-                Id = beer.BeerID,
-                Name = beer.Name,
-                Alcohol = beer.Alcohol,
-                BrandID = beer.BrandID
-            };
-
-            return CreatedAtAction(nameof(GetById), new { id = beer.BeerID }, beerDTO);
+            return CreatedAtAction(nameof(GetById), new { id = beerDTO.Id }, beerDTO);
         }
 
         [HttpPut("{id}")]

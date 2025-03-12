@@ -12,9 +12,29 @@ namespace Backend.Services
         {
             _context = context;
         }
-        public Task<BeerDTO> Add(BeerInsertDTO beerInsertDTO)
+        public async Task<BeerDTO> Add(BeerInsertDTO beerInsertDTO)
         {
-            throw new NotImplementedException();
+            var beer = new Beer()
+            {
+                Name = beerInsertDTO.Name,
+                Alcohol = beerInsertDTO.Alcohol,
+                BrandID = beerInsertDTO.BrandID
+            };
+
+            await _context.Beers.AddAsync(beer);
+
+            // se guardan los datos en BD
+            await _context.SaveChangesAsync();
+
+            var beerDTO = new BeerDTO
+            {
+                Id = beer.BeerID,
+                Name = beer.Name,
+                Alcohol = beer.Alcohol,
+                BrandID = beer.BrandID
+            };
+
+            return beerDTO;
         }
 
         public Task<BeerDTO> Delete(int id)
