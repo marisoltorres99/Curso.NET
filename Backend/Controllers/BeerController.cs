@@ -56,7 +56,7 @@ namespace Backend.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<BeerDTO>> Add(BeerInsertDTO beerInsertDTO )
+        public async Task<ActionResult<BeerDTO>> Add(BeerInsertDTO beerInsertDTO)
         {
             var validationResult = await _beerInsertValidator.ValidateAsync(beerInsertDTO);
 
@@ -125,7 +125,7 @@ namespace Backend.Controllers
 
         [HttpDelete("{id}")]
 
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult<BeerDTO>> Delete(int id)
         {
             var beer = await _context.Beers.FindAsync(id);
 
@@ -137,7 +137,15 @@ namespace Backend.Controllers
             _context.Beers.Remove(beer);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            var beerDTO = new BeerDTO
+            {
+                Id = beer.BeerID,
+                Name = beer.Name,
+                Alcohol = beer.Alcohol,
+                BrandID = beer.BrandID
+            };
+
+            return Ok(beerDTO);
         }
     }
 }
