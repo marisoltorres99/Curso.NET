@@ -66,28 +66,9 @@ namespace Backend.Controllers
                 return BadRequest(validationResult.Errors);
             }
 
-            var beer = await _context.Beers.FindAsync(id);
+            var beerDTO = await _beerService.Update(id, beerUpdateDTO);
 
-            if (beer == null)
-            {
-                return NotFound();
-            }
-
-            beer.Name = beerUpdateDTO.Name;
-            beer.BrandID = beerUpdateDTO.BrandID;
-            beer.Alcohol = beerUpdateDTO.Alcohol;
-
-            await _context.SaveChangesAsync();
-
-            var beerDTO = new BeerDTO
-            {
-                Id = beer.BeerID,
-                Name = beer.Name,
-                Alcohol = beer.Alcohol,
-                BrandID = beer.BrandID
-            };
-
-            return Ok(beerDTO);
+            return beerDTO == null ? NotFound() : Ok(beerDTO);
         }
 
         [HttpDelete("{id}")]

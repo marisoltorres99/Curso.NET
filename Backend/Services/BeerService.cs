@@ -71,9 +71,30 @@ namespace Backend.Services
             return null;
         }
 
-        public Task<BeerDTO> Update(int id, BeerUpdateDTO beerUpdateDTO)
+        public async Task<BeerDTO> Update(int id, BeerUpdateDTO beerUpdateDTO)
         {
-            throw new NotImplementedException();
+            var beer = await _context.Beers.FindAsync(id);
+
+            if (beer != null)
+            {
+                beer.Name = beerUpdateDTO.Name;
+                beer.BrandID = beerUpdateDTO.BrandID;
+                beer.Alcohol = beerUpdateDTO.Alcohol;
+
+                await _context.SaveChangesAsync();
+
+                var beerDTO = new BeerDTO
+                {
+                    Id = beer.BeerID,
+                    Name = beer.Name,
+                    Alcohol = beer.Alcohol,
+                    BrandID = beer.BrandID
+                };
+
+                return beerDTO;
+            }
+
+            return null;
         }
     }
 }
