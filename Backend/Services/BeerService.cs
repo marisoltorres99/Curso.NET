@@ -1,9 +1,17 @@
 ﻿using Backend.DTOs;
+using Backend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services
 {
     public class BeerService : IBeerService
     {
+        private StoreContext _context;
+
+        public BeerService(StoreContext context)
+        {
+            _context = context;
+        }
         public Task<BeerDTO> Add(BeerInsertDTO beerInsertDTO)
         {
             throw new NotImplementedException();
@@ -14,14 +22,33 @@ namespace Backend.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<BeerDTO>> Get()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<BeerDTO>> Get() =>
+            await _context.Beers.Select(b => new BeerDTO
+            {
+                Id = b.BeerID,
+                Name = b.Name,
+                Alcohol = b.Alcohol,
+                BrandID = b.BrandID
+            }).ToListAsync();
 
-        public Task<BeerDTO> GetById(int id)
+        public async Task<BeerDTO> GetById(int id)
         {
-            throw new NotImplementedException();
+            var beer = await _context.Beers.FindAsync(id);
+
+            if (beer != null)
+            {
+                var beerDTO = new BeerDTO
+                {
+                    Id = beer.BeerID,
+                    Name = beer.Name,
+                    Alcohol = beer.Alcohol,
+                    BrandID = beer.BrandID
+                };
+
+                return beerDTO;
+            }
+
+            return null;
         }
 
         public Task<BeerDTO> Update(int id, BeerUpdateDTO beerUpdateDTO)
