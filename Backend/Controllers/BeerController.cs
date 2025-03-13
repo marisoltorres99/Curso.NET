@@ -12,16 +12,14 @@ namespace Backend.Controllers
     [ApiController]
     public class BeerController : ControllerBase
     {
-        private StoreContext _context;
         private IValidator<BeerInsertDTO> _beerInsertValidator;
         private IValidator<BeerUpdateDTO> _beerUpdateValidator;
-        private IBeerService _beerService;
+        private ICommonService<BeerDTO, BeerInsertDTO, BeerUpdateDTO> _beerService;
 
         public BeerController(StoreContext context, IValidator<BeerInsertDTO> beerInsertValidator, 
             IValidator<BeerUpdateDTO> beerUpdateValidator,
-            IBeerService beerService)
+            [FromKeyedServices("beerService")] ICommonService<BeerDTO, BeerInsertDTO, BeerUpdateDTO> beerService)
         {
-            _context = context;
             _beerInsertValidator = beerInsertValidator;
             _beerUpdateValidator = beerUpdateValidator;
             _beerService = beerService;
