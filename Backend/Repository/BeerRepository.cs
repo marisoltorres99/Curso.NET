@@ -1,18 +1,22 @@
-﻿using Backend.Models;
+﻿using Backend.DTOs;
+using Backend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repository
 {
     public class BeerRepository : IRepository<Beer>
     {
-        public Task<IEnumerable<Beer>> Get()
-        {
-            throw new NotImplementedException();
-        }
+        private StoreContext _context;
 
-        public Task<Beer> GetById(int id)
+        public BeerRepository(StoreContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
+        public async Task<IEnumerable<Beer>> Get() =>
+            await _context.Beers.ToListAsync();
+
+        public async Task<Beer> GetById(int id) =>
+            await _context.Beers.FindAsync(id);
 
         public Task Add(Beer entity)
         {
