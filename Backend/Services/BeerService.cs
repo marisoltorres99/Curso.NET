@@ -37,9 +37,27 @@ namespace Backend.Services
             return beerDTO;
         }
 
-        public Task<BeerDTO> Delete(int id)
+        public async Task<BeerDTO> Delete(int id)
         {
-            throw new NotImplementedException();
+            var beer = await _context.Beers.FindAsync(id);
+
+            if (beer != null)
+            {
+                var beerDTO = new BeerDTO
+                {
+                    Id = beer.BeerID,
+                    Name = beer.Name,
+                    Alcohol = beer.Alcohol,
+                    BrandID = beer.BrandID
+                };
+
+                _context.Remove(beer);
+                await _context.SaveChangesAsync();
+
+                return beerDTO;
+            }
+
+            return null;
         }
 
         public async Task<IEnumerable<BeerDTO>> Get() =>

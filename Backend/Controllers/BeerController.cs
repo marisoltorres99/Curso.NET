@@ -75,25 +75,8 @@ namespace Backend.Controllers
 
         public async Task<ActionResult<BeerDTO>> Delete(int id)
         {
-            var beer = await _context.Beers.FindAsync(id);
-
-            if (beer == null)
-            {
-                return NotFound();
-            }
-
-            _context.Beers.Remove(beer);
-            await _context.SaveChangesAsync();
-
-            var beerDTO = new BeerDTO
-            {
-                Id = beer.BeerID,
-                Name = beer.Name,
-                Alcohol = beer.Alcohol,
-                BrandID = beer.BrandID
-            };
-
-            return Ok(beerDTO);
+            var beerDTO = await _beerService.Delete(id);
+            return beerDTO == null ? NotFound() : Ok(beerDTO);
         }
     }
 }
