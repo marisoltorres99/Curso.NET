@@ -16,9 +16,9 @@ Este proyecto contiene el código del backend desarrollado en .NET para la admin
 
 Tecnologías utilizadas
 
-.NET 6
+.NET 8
 
-Entity Framework Core
+Entity Framework
 
 SQL Server
 
