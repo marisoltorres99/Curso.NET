@@ -48,6 +48,11 @@ namespace Backend.Controllers
                 return BadRequest(validationResult.Errors);
             }
 
+            if (!_beerService.Validate(beerInsertDTO))
+            {
+                return BadRequest(_beerService.Errors);
+            }
+
             var beerDTO = await _beerService.Add(beerInsertDTO);
 
             return CreatedAtAction(nameof(GetById), new { id = beerDTO.Id }, beerDTO);
@@ -62,6 +67,11 @@ namespace Backend.Controllers
             if (!validationResult.IsValid)
             {
                 return BadRequest(validationResult.Errors);
+            }
+
+            if (!_beerService.Validate(beerUpdateDTO))
+            {
+                return BadRequest(_beerService.Errors);
             }
 
             var beerDTO = await _beerService.Update(id, beerUpdateDTO);

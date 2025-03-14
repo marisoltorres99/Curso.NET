@@ -10,6 +10,7 @@ namespace Backend.Services
     {
         private IRepository<Beer> _beerRepository;
         private IMapper _mapper;
+        public List<string> Errors { get; }
 
         public BeerService(IRepository<Beer> beerRepository, IMapper mapper)
         {
@@ -86,5 +87,16 @@ namespace Backend.Services
 
             return null;
         }
+
+        public bool Validate(BeerInsertDTO beerInsertDTO)
+        {
+            return true;
+        }
+
+        public bool Validate(BeerUpdateDTO beerUpdateDTO)
+        {
+            return true;
+        }
+
     }
 }
