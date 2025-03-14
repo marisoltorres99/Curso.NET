@@ -9,6 +9,7 @@ namespace Backend.AutoMappers
         public MappingProfile()
         {
             CreateMap<BeerInsertDTO, Beer>();
+            CreateMap<Beer, BeerDTO>().ForMember(dto => dto.Id, m => m.MapFrom(b => b.BeerID));
         }
     }
 }

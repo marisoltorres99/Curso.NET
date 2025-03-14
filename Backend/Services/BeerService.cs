@@ -25,13 +25,7 @@ namespace Backend.Services
             // se guardan los datos en BD
             await _beerRepository.Save();
 
-            var beerDTO = new BeerDTO
-            {
-                Id = beer.BeerID,
-                Name = beer.Name,
-                Alcohol = beer.Alcohol,
-                BrandID = beer.BrandID
-            };
+            var beerDTO = _mapper.Map<BeerDTO>(beer);
 
             return beerDTO;
         }
@@ -42,13 +36,7 @@ namespace Backend.Services
 
             if (beer != null)
             {
-                var beerDTO = new BeerDTO
-                {
-                    Id = beer.BeerID,
-                    Name = beer.Name,
-                    Alcohol = beer.Alcohol,
-                    BrandID = beer.BrandID
-                };
+                var beerDTO = _mapper.Map<BeerDTO>(beer);
 
                 _beerRepository.Delete(beer);
                 await _beerRepository.Save();
@@ -63,13 +51,7 @@ namespace Backend.Services
         {
             var beers = await _beerRepository.Get();
 
-            return beers.Select(b => new BeerDTO
-            {
-                Id = b.BeerID,
-                Name = b.Name,
-                Alcohol = b.Alcohol,
-                BrandID = b.BrandID
-            });
+            return beers.Select(b => _mapper.Map<BeerDTO>(b));
         }
 
         public async Task<BeerDTO> GetById(int id)
@@ -78,13 +60,7 @@ namespace Backend.Services
 
             if (beer != null)
             {
-                var beerDTO = new BeerDTO
-                {
-                    Id = beer.BeerID,
-                    Name = beer.Name,
-                    Alcohol = beer.Alcohol,
-                    BrandID = beer.BrandID
-                };
+                var beerDTO = _mapper.Map<BeerDTO>(beer);
 
                 return beerDTO;
             }
@@ -105,13 +81,7 @@ namespace Backend.Services
                 _beerRepository.Update(beer);
                 await _beerRepository.Save();
 
-                var beerDTO = new BeerDTO
-                {
-                    Id = beer.BeerID,
-                    Name = beer.Name,
-                    Alcohol = beer.Alcohol,
-                    BrandID = beer.BrandID
-                };
+                var beerDTO = _mapper.Map<BeerDTO>(beer);
 
                 return beerDTO;
             }
