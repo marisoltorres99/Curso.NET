@@ -1,4 +1,5 @@
-﻿using Backend.DTOs;
+﻿using AutoMapper;
+using Backend.DTOs;
 using Backend.Models;
 using Backend.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -8,19 +9,16 @@ namespace Backend.Services
     public class BeerService : ICommonService<BeerDTO, BeerInsertDTO, BeerUpdateDTO>
     {
         private IRepository<Beer> _beerRepository;
+        private IMapper _mapper;
 
-        public BeerService(IRepository<Beer> beerRepository)
+        public BeerService(IRepository<Beer> beerRepository, IMapper mapper)
         {
             _beerRepository = beerRepository;
+            _mapper = mapper;
         }
         public async Task<BeerDTO> Add(BeerInsertDTO beerInsertDTO)
         {
-            var beer = new Beer()
-            {
-                Name = beerInsertDTO.Name,
-                Alcohol = beerInsertDTO.Alcohol,
-                BrandID = beerInsertDTO.BrandID
-            };
+            var beer = _mapper.Map<Beer>(beerInsertDTO);
 
             await _beerRepository.Add(beer);
 

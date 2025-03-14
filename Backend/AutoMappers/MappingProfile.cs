@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Backend.DTOs;
+using Backend.Models;
 
 namespace Backend.AutoMappers
 {
@@ -6,7 +8,7 @@ namespace Backend.AutoMappers
     {
         public MappingProfile()
         {
-
+            CreateMap<BeerInsertDTO, Beer>();
         }
     }
 }
