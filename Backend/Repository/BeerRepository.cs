@@ -27,10 +27,9 @@ namespace Backend.Repository
             _context.Beers.Entry(beer).State = EntityState.Modified;
         }
 
-        public void Delete(Beer entity)
-        {
-            throw new NotImplementedException();
-        }
+        public void Delete(Beer beer) =>
+            _context.Beers.Remove(beer);
+
 
         public async Task Save() =>
             await _context.SaveChangesAsync();
